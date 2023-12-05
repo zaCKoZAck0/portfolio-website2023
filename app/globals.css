@@ -1,0 +1,182 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  --line-color: #e5e7eb;
+}
+
+html.dark {
+  --line-color: rgba(255, 255, 255, 0.2);
+}
+
+.borderBlack {
+  @apply border border-black/10;
+}
+
+.dark .font-outline-2 {
+  -webkit-text-stroke: 2px rgba(255, 255, 255, 0.4);
+}
+
+.font-outline-2 {
+  -webkit-text-stroke: 2px rgba(0, 0, 0, 0.4);
+}
+
+.font-outline-4 {
+  -webkit-text-stroke: 4px black;
+}
+
+@keyframes jumbo {
+  from {
+    background-position: 50% 50%, 50% 50%;
+  }
+  to {
+    background-position: 350% 50%, 350% 50%;
+  }
+}
+
+.jumbo {
+  --stripes: repeating-linear-gradient(
+    100deg,
+    #fff 0%,
+    #fff 7%,
+    transparent 10%,
+    transparent 12%,
+    #fff 16%
+  );
+  --stripesDark: repeating-linear-gradient(
+    100deg,
+    #000 0%,
+    #000 7%,
+    transparent 10%,
+    transparent 12%,
+    #000 16%
+  );
+  --rainbow: repeating-linear-gradient(
+    100deg,
+    #60a5fa 10%,
+    #e879f9 15%,
+    #60a5fa 20%,
+    #5eead4 25%,
+    #60a5fa 30%
+  );
+  background-image: var(--stripes), var(--rainbow);
+  background-size: 300%, 200%;
+  background-position: 50% 50%, 50% 50%;
+
+  filter: blur(10px) invert(100%);
+
+  mask-image: radial-gradient(ellipse at 100% 0%, black 40%, transparent 70%);
+
+  pointer-events: none;
+}
+
+.jumbo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--stripes), var(--rainbow);
+  background-size: 200%, 100%;
+  animation: jumbo 60s linear infinite;
+  background-attachment: fixed;
+  mix-blend-mode: difference;
+}
+
+.dark .jumbo {
+  background-image: var(--stripesDark), var(--rainbow);
+  filter: blur(10px) opacity(50%) saturate(200%);
+}
+.dark .jumbo::after {
+  background-image: var(--stripesDark), var(--rainbow);
+}
+
+#figma-cursor {
+  animation-name: cursor;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes cursor {
+  20% {
+    transform: translateX(-20px) translateY(20px);
+  }
+  40% {
+    transform: translateX(-40px) translateY(-10px);
+  }
+  80% {
+    transform: translateY(-20px);
+  }
+}
+
+.beacon {
+  height: 10px;
+  outline: none;
+  width: 10px;
+  border-radius: 50%;
+  -webkit-animation: grow 0.4s 1 linear;
+  animation: grow 0.4s 1 linear;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+}
+.beacon:before {
+  position: absolute;
+  content: "";
+  height: 10px;
+  width: 10px;
+  left: 0;
+  outline: none;
+  top: 0;
+  background-color: transparent;
+  border-radius: 50%;
+  box-shadow: 0px 0px 2px 2px rgb(0, 225, 0);
+  -webkit-animation: active 2s infinite linear;
+  animation: active 2s infinite linear;
+}
+
+@-webkit-keyframes grow {
+  0% {
+    -webkit-transform: scale(0.1);
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes grow {
+  0% {
+    transform: scale(0.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
+@-webkit-keyframes active {
+  0% {
+    -webkit-transform: scale(0.1);
+    opacity: 1;
+  }
+  70% {
+    -webkit-transform: scale(2.5);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes active {
+  0% {
+    transform: scale(0.1);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(2.5);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
